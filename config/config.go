@@ -41,6 +41,7 @@ type Config struct {
 	Speed    int16
 	DataBits int8
 	StopBits int8
+	UnitId   int8
 	Broker   string
 	ClientId string
 	UserName string

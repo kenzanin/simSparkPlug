@@ -19,6 +19,7 @@ func Init(c *config.Config) (*modbus.ModbusClient, error) {
 		StopBits: uint(c.StopBits),
 		Timeout:  500 * time.Millisecond,
 	})
+	client.SetUnitId(uint8(c.UnitId))
 	if err != nil {
 		return client, err
 	}
