@@ -1,11 +1,11 @@
 {
     "port_comment": "ganti ke rtu:///dev/ttyUSB0 atau rtu://COM1 tergantung OS nya",
-    "port": "rtu://COM4",
+    "port": "rtu:///dev/tnt1",
     "speed": 9600,
     "databit": 8,
     "stopbit": 1,
     "UnitId": 1,
-    "Broker": "localhost:1883",
+    "Broker": "34.28.80.71:1883",
     "ClientId": "kenzanin-12345",
     "UserName": "emqx",
     "Password": "public"
