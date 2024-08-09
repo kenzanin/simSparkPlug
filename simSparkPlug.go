@@ -49,6 +49,7 @@ func main() {
 	for {
 		data.TimeStamp = uint64(time.Now().Unix())
 		modbus.ReadSensor(mod, data)
+		count += 1
 		log.Printf("count: %d", count)
 		log.Print(data)
 		mqtt.Publish(mqttpub, data)
