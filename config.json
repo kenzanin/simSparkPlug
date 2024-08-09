@@ -4,6 +4,7 @@
     "speed": 9600,
     "databit": 8,
     "stopbit": 1,
+    "Broker":   "localhost:1883",
     "ClientId": "kenzanin-12345",
     "UserName": "emqx",
     "Password": "public"
