@@ -1,6 +1,6 @@
 {
     "port_comment": "ganti ke rtu:///dev/ttyUSB0 atau rtu://COM1 tergantung OS nya",
-    "port": "rtu:///dev/tnt1",
+    "port": "rtu://COM4",
     "speed": 9600,
     "databit": 8,
     "stopbit": 1,
