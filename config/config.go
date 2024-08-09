@@ -8,7 +8,7 @@ import (
 
 type SensorType struct {
 	Name      string
-	Address   uint8
+	Address   uint8 `json:"-"`
 	Alias     uint8
 	TimeStamp uint64
 	DataType  string
@@ -17,23 +17,45 @@ type SensorType struct {
 
 type SparkPlugB struct {
 	TimeStamp uint64
+	Address   uint8  `json:"-"`
+	Topic     string `json:"-"`
 	Metrics   []SensorType
 	Seq       int
 }
 
-func NewSparkPlugB() *SparkPlugB {
-	matriks := &[]SensorType{
-		{Name: "wind speed", Address: 8, Alias: 0, DataType: "UInt16"},
-		{Name: "wind direction", Address: 10, Alias: 1, DataType: "UInt16"},
-		{Name: "barometer", Address: 4, Alias: 2, DataType: "UInt16"},
-		{Name: "inside temperature", Address: 5, Alias: 3, DataType: "UInt16"},
-		{Name: "outside temperature", Address: 7, Alias: 4, DataType: "UInt16"},
-		{Name: "inside humidity", Address: 6, Alias: 5, DataType: "UInt16"},
-		{Name: "outside humidity", Address: 19, Alias: 5, DataType: "UInt16"},
-		{Name: "rain rate", Address: 24, Alias: 5, DataType: "UInt16"},
-		{Name: "solar radiation", Address: 26, Alias: 5, DataType: "UInt16"},
+func NewSparkPlugB() *[]SparkPlugB {
+	data := &[]SparkPlugB{
+		{TimeStamp: 0, Seq: 0,
+			Address: 1,
+			Topic:   "spBv1.0/mds/data/davis/gateway01",
+			Metrics: []SensorType{
+				{Name: "wind speed", Address: 8, Alias: 0, DataType: "UInt16"},
+				{Name: "wind direction", Address: 10, Alias: 1, DataType: "UInt16"},
+				{Name: "barometer", Address: 4, Alias: 2, DataType: "UInt16"},
+				{Name: "inside temperature", Address: 5, Alias: 3, DataType: "UInt16"},
+				{Name: "outside temperature", Address: 7, Alias: 4, DataType: "UInt16"},
+				{Name: "inside humidity", Address: 6, Alias: 5, DataType: "UInt16"},
+				{Name: "outside humidity", Address: 19, Alias: 5, DataType: "UInt16"},
+				{Name: "rain rate", Address: 24, Alias: 5, DataType: "UInt16"},
+				{Name: "solar radiation", Address: 26, Alias: 5, DataType: "UInt16"},
+			}},
+		{TimeStamp: 0, Seq: 0, Address: 2,
+			Topic: "spBv1.0/mds/data/davis/gateway02",
+			Metrics: []SensorType{
+				{Name: "wind speed", Address: 8, Alias: 0, DataType: "UInt16"},
+				{Name: "wind direction", Address: 10, Alias: 1, DataType: "UInt16"},
+				{Name: "barometer", Address: 4, Alias: 2, DataType: "UInt16"},
+				{Name: "inside temperature", Address: 5, Alias: 3, DataType: "UInt16"},
+				{Name: "outside temperature", Address: 7, Alias: 4, DataType: "UInt16"},
+				{Name: "inside humidity", Address: 6, Alias: 5, DataType: "UInt16"},
+				{Name: "outside humidity", Address: 19, Alias: 5, DataType: "UInt16"},
+				{Name: "rain rate", Address: 24, Alias: 5, DataType: "UInt16"},
+				{Name: "solar radiation", Address: 26, Alias: 5, DataType: "UInt16"}}},
 	}
-	return &SparkPlugB{TimeStamp: 0, Metrics: *matriks, Seq: 0}
+	for i := 0; i < len(*data); i++ {
+		(*data)[i].Seq = len((*data)[i].Metrics)
+	}
+	return data
 }
 
 type Config struct {

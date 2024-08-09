@@ -43,8 +43,9 @@ func readReg(c *modbus.ModbusClient, addr uint16, val *uint16) {
 }
 
 func ReadSensor(c *modbus.ModbusClient, dat *config.SparkPlugB) {
-	for i := 0; i < len(dat.Metrics); i++ {
-		data := &dat.Metrics[i]
+	c.SetUnitId(dat.Address)
+	for ii := 0; ii < len(dat.Metrics); ii++ {
+		data := &dat.Metrics[ii]
 		data.TimeStamp = uint64(time.Now().Unix())
 		readReg(c, uint16(data.Address), &data.Value)
 	}

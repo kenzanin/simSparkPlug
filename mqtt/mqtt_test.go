@@ -48,14 +48,16 @@ func TestPubWithModData(t *testing.T) {
 	}
 	defer client.Disconnect(250)
 
-	data := config.NewSparkPlugB()
-	data.TimeStamp = uint64(time.Now().Unix())
-	data.Seq = len(data.Metrics)
 	c, err := modbus.Init(conf)
 	if err != nil {
 		log.Panicf("error")
 		return
 	}
-	modbus.ReadSensor(c, data)
+
+	data := config.NewSparkPlugB()
+	for i := 0; i < len(*data); i++ {
+		(*data)[i].TimeStamp = uint64(time.Now().Unix())
+		modbus.ReadSensor(c, &(*data)[i])
+	}
 	Publish(client, data)
 }

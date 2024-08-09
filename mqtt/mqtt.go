@@ -36,19 +36,15 @@ func Init(c *config.Config) (mqtt.Client, error) {
 	return client, nil
 }
 
-func Publish(client mqtt.Client, data *config.SparkPlugB) {
-	// spBv1.0/mygroup/data/edge1/wind_sensor
-	// can be customized
-	// mygroup
-	// edge1
-	// wind_sensor
-	const topic = "spBv1.0/mds/data/davis/gateway01"
-
-	payload, err := json.Marshal(data)
-	if err != nil {
-		log.Fatalf("error convert data to json: %s", err)
-		return
+func Publish(client mqtt.Client, data *[]config.SparkPlugB) {
+	for i := 0; i < len(*data); i++ {
+		topic := (*data)[i].Topic
+		payload, err := json.Marshal((*data)[i].Metrics)
+		if err != nil {
+			log.Fatalf("error convert data to json: %s", err)
+			return
+		}
+		token := client.Publish(topic, 0, false, payload)
+		token.Wait()
 	}
-	token := client.Publish(topic, 0, false, payload)
-	token.Wait()
 }

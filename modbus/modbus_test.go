@@ -31,5 +31,8 @@ func TestReadSensor(t *testing.T) {
 	}
 	defer client.Close()
 	dat := config.NewSparkPlugB()
-	ReadSensor(client, dat)
+	for i := 0; i < len(*dat); i++ {
+		d := &(*dat)[i]
+		ReadSensor(client, d)
+	}
 }
