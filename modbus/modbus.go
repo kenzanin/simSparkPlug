@@ -10,7 +10,7 @@ import (
 )
 
 func Init(c *config.Config) (*modbus.ModbusClient, error) {
-	log.Printf("ini init\n")
+	log.Printf("ini modbus\n")
 	client, err := modbus.NewClient(&modbus.ClientConfiguration{
 		URL:      c.Port,
 		Speed:    uint(c.Speed),
@@ -19,12 +19,15 @@ func Init(c *config.Config) (*modbus.ModbusClient, error) {
 		StopBits: uint(c.StopBits),
 		Timeout:  500 * time.Millisecond,
 	})
-	client.SetUnitId(uint8(c.UnitId))
 	if err != nil {
+		log.Printf("error init client: %s", err)
 		return client, err
 	}
+	client.SetUnitId(uint8(c.UnitId))
+
 	err = client.Open()
 	if err != nil {
+		log.Printf("error client open: %s", err)
 		return client, err
 	}
 	return client, nil
