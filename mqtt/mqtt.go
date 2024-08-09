@@ -42,7 +42,7 @@ func Publish(client mqtt.Client, data *config.SparkPlugB) {
 	// mygroup
 	// edge1
 	// wind_sensor
-	const topic = "spBv1.0/mds/data/merk_sensor/wind_sensor"
+	const topic = "spBv1.0/mds/data/davis/gateway01"
 
 	payload, err := json.Marshal(data)
 	if err != nil {
