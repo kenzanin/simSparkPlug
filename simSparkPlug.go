@@ -37,7 +37,7 @@ func main() {
 			(*data)[i].TimeStamp = uint64(time.Now().Unix())
 			modbus.ReadSensor(mod, &(*data)[i])
 		}
-		log.Printf("%#v", data)
+		log.Printf("%+v", data)
 		mqtt.Publish(mqttpub, data)
 		time.Sleep(1 * time.Second)
 	}
