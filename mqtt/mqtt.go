@@ -39,7 +39,7 @@ func Init(c *config.Config) (mqtt.Client, error) {
 func Publish(client mqtt.Client, data *[]config.SparkPlugB) {
 	for i := 0; i < len(*data); i++ {
 		topic := (*data)[i].Topic
-		payload, err := json.Marshal((*data)[i].Metrics)
+		payload, err := json.Marshal((*data)[i])
 		if err != nil {
 			log.Fatalf("error convert data to json: %s", err)
 			return
